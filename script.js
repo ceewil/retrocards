@@ -30,6 +30,8 @@ document
 
     const selected = document.querySelector(".template.selected");
     const uploadedFile = document.getElementById("imageUpload").files[0];
+    const spinner = document.getElementById("spinner");
+    const preview = document.getElementById("preview");
 
     if (!selected || !uploadedFile) {
       alert("Please upload a photo and select a character template.");
@@ -40,6 +42,9 @@ document
     formData.append("photo", uploadedFile);
     formData.append("character", selected.dataset.character);
 
+    spinner.style.display = "block";
+    preview.innerHTML = "";
+
     try {
       const response = await fetch("https://retrocards.onrender.com/generate", {
         method: "POST",
@@ -47,14 +52,15 @@ document
       });
 
       const data = await response.json();
+      spinner.style.display = "none";
 
       if (data.imageUrl) {
-        const preview = document.getElementById("preview");
         preview.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image" />`;
       } else {
         alert("Image generation failed. Please try again.");
       }
     } catch (err) {
+      spinner.style.display = "none";
       console.error("Error:", err);
       alert("An error occurred while generating the image.");
     }
