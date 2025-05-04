@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>80s AI Character Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>80s Character Customizer</h1>
+    <form id="customizer-form">
+      <label for="imageUpload">Upload Your Photo</label>
+      <input type="file" id="imageUpload" accept="image/*" />
+      <div id="preview"></div>
+
+      <label>Select Your Character Style</label>
+      <div class="template-options">
+        <div class="template" data-character="Grendals">
+          <img src="templates/grendals-thumb.png" alt="Grendals" />
+          <p>Grendals</p>
+        </div>
+        <div class="template" data-character="Operation Bravo">
+          <img src="templates/operation-bravo-thumb.png" alt="Operation Bravo" />
+          <p>Operation Bravo</p>
+        </div>
+        <div class="template" data-character="Slop Squad">
+          <img src="templates/slop-squad-thumb.png" alt="Slop Squad" />
+          <p>Slop Squad</p>
+        </div>
+      </div>
+
+      <button type="submit">Generate Character</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
