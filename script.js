@@ -25,16 +25,37 @@ document.querySelectorAll(".template").forEach((template) => {
 
 document
   .getElementById("customizer-form")
-  .addEventListener("submit", function (e) {
+  .addEventListener("submit", async function (e) {
     e.preventDefault();
-    const selected = document.querySelector(".template.selected");
-    const uploaded = document.getElementById("imageUpload").files[0];
 
-    if (!selected || !uploaded) {
+    const selected = document.querySelector(".template.selected");
+    const uploadedFile = document.getElementById("imageUpload").files[0];
+
+    if (!selected || !uploadedFile) {
       alert("Please upload a photo and select a character template.");
       return;
     }
 
-    alert(`Photo + "${selected.dataset.character}" template selected.`);
-    // This is where you'd integrate API logic or forward to next step
+    const formData = new FormData();
+    formData.append("photo", uploadedFile);
+    formData.append("character", selected.dataset.character);
+
+    try {
+      const response = await fetch("https://retrocards.onrender.com/generate", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.imageUrl) {
+        const preview = document.getElementById("preview");
+        preview.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image" />`;
+      } else {
+        alert("Image generation failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("An error occurred while generating the image.");
+    }
   });
