@@ -46,7 +46,7 @@ document
     preview.innerHTML = "";
 
     try {
-      const response = await fetch("https://retrocards.onrender.com/generate", {
+    const response = await fetch("https://retrocardtest.onrender.com/generate", {
         method: "POST",
         body: formData,
       });
