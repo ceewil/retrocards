@@ -79,13 +79,11 @@ document.getElementById("customizer-form").addEventListener("submit", async func
     spinner.style.display = "none";
 
     if (data.imageUrl) {
-      preview.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image" />`;
-    } else {
-      alert("Image generation failed. Please try again.");
-    }
-  } catch (err) {
-    spinner.style.display = "none";
-    console.error("Error:", err);
-    alert("An error occurred while generating the image.");
-  }
+  preview.innerHTML = `
+    <img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />
+    <a href="${data.imageUrl}" download="retrocards-image.png" id="downloadBtn">
+      <button class="download-button">Download Image</button>
+    </a>
+  `;
+}
 });
