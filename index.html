@@ -77,6 +77,8 @@
 
       <button type="submit">Generate Character</button>
     </form>
+
+    <div id="download-wrapper" style="text-align:center; margin-top: 1rem;"></div>
   </div>
 
   <script>
@@ -131,6 +133,7 @@
       const uploadedFile = document.getElementById("imageUpload").files[0];
       const spinner = document.getElementById("spinner");
       const preview = document.getElementById("preview");
+      const download = document.getElementById("download-wrapper");
 
       if (!selected || !uploadedFile) {
         alert("Please upload a photo and select a character template.");
@@ -150,6 +153,7 @@
 
       spinner.style.display = "block";
       preview.innerHTML = "";
+      download.innerHTML = "";
 
       try {
         const response = await fetch("https://retrocardtest.onrender.com/generate", {
@@ -161,10 +165,11 @@
         spinner.style.display = "none";
 
         if (data.imageUrl) {
-          preview.innerHTML = `
-            <img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />
-            <a href="${data.imageUrl}" download="retrocards-image.png" id="downloadBtn">
-              <button class="download-button">Download Image</button>
+          preview.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />`;
+
+          download.innerHTML = `
+            <a href="${data.imageUrl}" download="retrocards-image.png">
+              <button type="button" class="download-button">Download Image</button>
             </a>
           `;
         } else {
