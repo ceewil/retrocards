@@ -1,4 +1,3 @@
-
 body {
   background: #121212;
   font-family: 'Segoe UI', sans-serif;
@@ -104,9 +103,10 @@ button:hover {
 
 .template img {
   width: 100%;
-  height: 140px;
-  object-fit: cover;
+  height: 160px;
+  object-fit: contain;
   border-radius: 8px;
+  background: #000;
 }
 
 .template p {
@@ -154,11 +154,6 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 255, 247, 0.2);
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 .download-button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
@@ -174,4 +169,10 @@ button:hover {
 
 .download-button:hover {
   background-color: #00ccc1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
