@@ -44,23 +44,35 @@
       </div>
 
       <div id="custom-inputs" class="custom-inputs hidden">
-        <label for="dominantTrait">Dominant Trait (for Grendals)</label>
-        <input type="text" id="dominantTrait" name="dominantTrait" placeholder="e.g. slimy" />
+        <div class="input-block" id="block-dominantTrait">
+          <label for="dominantTrait">Dominant Trait (for Grendals)</label>
+          <input type="text" id="dominantTrait" placeholder="e.g. slimy" />
+        </div>
 
-        <label for="visualStyle">Visual Style (for Grendals)</label>
-        <input type="text" id="visualStyle" name="visualStyle" placeholder="e.g. toxic punk" />
+        <div class="input-block" id="block-visualStyle">
+          <label for="visualStyle">Visual Style (for Grendals)</label>
+          <input type="text" id="visualStyle" placeholder="e.g. toxic punk" />
+        </div>
 
-        <label for="weaponType">Weapon Type (for Operation Bravo)</label>
-        <input type="text" id="weaponType" name="weaponType" placeholder="e.g. tactical rifle" />
+        <div class="input-block" id="block-weaponType">
+          <label for="weaponType">Weapon Type (for Operation Bravo)</label>
+          <input type="text" id="weaponType" placeholder="e.g. tactical rifle" />
+        </div>
 
-        <label for="combatStyle">Combat Style (for Operation Bravo)</label>
-        <input type="text" id="combatStyle" name="combatStyle" placeholder="e.g. close quarters" />
+        <div class="input-block" id="block-combatStyle">
+          <label for="combatStyle">Combat Style (for Operation Bravo)</label>
+          <input type="text" id="combatStyle" placeholder="e.g. close quarters" />
+        </div>
 
-        <label for="favoriteItem">Favorite Item (for Trash Can Kids)</label>
-        <input type="text" id="favoriteItem" name="favoriteItem" placeholder="e.g. moldy lunchbox" />
+        <div class="input-block" id="block-favoriteItem">
+          <label for="favoriteItem">Favorite Item (for Trash Can Kids)</label>
+          <input type="text" id="favoriteItem" placeholder="e.g. moldy lunchbox" />
+        </div>
 
-        <label for="favoriteActivity">Favorite Activity (for Trash Can Kids)</label>
-        <input type="text" id="favoriteActivity" name="favoriteActivity" placeholder="e.g. burping contests" />
+        <div class="input-block" id="block-favoriteActivity">
+          <label for="favoriteActivity">Favorite Activity (for Trash Can Kids)</label>
+          <input type="text" id="favoriteActivity" placeholder="e.g. burping contests" />
+        </div>
       </div>
 
       <button type="submit">Generate Character</button>
@@ -93,21 +105,20 @@
         const inputBlock = document.getElementById("custom-inputs");
         inputBlock.classList.remove("hidden");
 
-        inputBlock.querySelectorAll("input").forEach((input) => {
-          input.parentElement.style.display = "none";
-        });
+        const allBlocks = document.querySelectorAll(".input-block");
+        allBlocks.forEach(block => block.style.display = "none");
 
         if (selectedChar === "Grendals") {
           ["dominantTrait", "visualStyle"].forEach(id => {
-            document.getElementById(id).parentElement.style.display = "block";
+            document.getElementById("block-" + id).style.display = "block";
           });
         } else if (selectedChar === "Operation Bravo") {
           ["weaponType", "combatStyle"].forEach(id => {
-            document.getElementById(id).parentElement.style.display = "block";
+            document.getElementById("block-" + id).style.display = "block";
           });
         } else if (selectedChar === "Trash Can Kids") {
           ["favoriteItem", "favoriteActivity"].forEach(id => {
-            document.getElementById(id).parentElement.style.display = "block";
+            document.getElementById("block-" + id).style.display = "block";
           });
         }
       });
