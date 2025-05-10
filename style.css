@@ -1,128 +1,166 @@
+
 body {
+  font-family: 'Arial', sans-serif;
   background-color: #111;
-  color: #fff;
-  font-family: Arial, sans-serif;
+  color: white;
   margin: 0;
   padding: 0;
 }
 
 .intro-banner {
   text-align: center;
-  padding: 2rem 1rem;
-  background-color: #222;
+  padding: 2rem 1rem 1rem;
+  background: linear-gradient(90deg, #222, #000);
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
 }
 
 h1 {
-  font-size: 2rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 label {
+  font-weight: bold;
   display: block;
-  margin: 1rem 0 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 input[type="file"],
 input[type="text"] {
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: none;
+  padding: 10px;
   margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 .template-options {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .template {
-  flex: 1 1 30%;
   background: #222;
   padding: 1rem;
-  border-radius: 10px;
   text-align: center;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  border: 2px solid transparent;
-}
-
-.template.selected {
-  border: 2px solid #00bfff;
-  transform: scale(1.05);
+  transition: transform 0.2s, background-color 0.2s;
+  flex: 1 1 250px;
+  max-width: 260px;
 }
 
 .template img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+.template.selected {
+  background: #444;
+  transform: scale(1.05);
+}
+
+.template-desc {
+  display: block;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.custom-inputs.hidden {
+  display: none;
 }
 
 .input-block {
   margin-bottom: 1rem;
 }
 
-button.generate-button,
-.download-button {
+.generate-button {
   display: block;
-  margin: 2rem auto 1rem auto;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  margin: 2rem auto;
+  padding: 0.75rem 2rem;
+  background-color: dodgerblue;
   border: none;
+  color: white;
+  font-size: 1.2rem;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
+  transition: background-color 0.2s;
 }
 
-.download-button {
-  background-color: #00cc66;
+.generate-button:hover {
+  background-color: deepskyblue;
+}
+
+.card-output {
+  margin-top: 2rem;
+  text-align: center;
 }
 
 .card-frame {
-  margin: 2rem auto;
-  max-width: 375px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .card-image {
   width: 100%;
-  height: auto;
+  max-width: 400px;
+  border-radius: 12px;
   display: block;
-  border-radius: 4px;
+  margin: 0 auto;
 }
 
 .card-overlay {
+  margin-top: 1rem;
   padding: 1rem;
-  text-align: center;
-  background: #111;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+  color: white;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
 }
 
 .overlay-name {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ff3333;
+  color: red;
+  margin-bottom: 0.5rem;
 }
 
 .overlay-level {
   font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffcc00;
-  margin: 0.5rem 0;
+  color: yellow;
+  margin-bottom: 0.5rem;
 }
 
 .overlay-backstory {
-  font-size: 1rem;
   font-style: italic;
-  color: #ccc;
+  line-height: 1.5;
+}
+
+.download-button {
+  padding: 0.7rem 1.5rem;
+  background: limegreen;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background: #32cd32;
 }
