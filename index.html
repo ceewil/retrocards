@@ -76,96 +76,38 @@
     <div id="card-output" class="card-output"></div>
 
     <script>
-      document.querySelectorAll(".template").forEach((template) => {
-        template.addEventListener("click", function () {
-          document.querySelectorAll(".template").forEach(el => el.classList.remove("selected"));
-          this.classList.add("selected");
+  document.querySelectorAll(".template").forEach((template) => {
+    template.addEventListener("click", function () {
+      document.querySelectorAll(".template").forEach(el => el.classList.remove("selected"));
+      this.classList.add("selected");
 
-          const selectedChar = this.dataset.character;
-          const customInputs = document.getElementById("custom-inputs");
-          const allBlocks = document.querySelectorAll(".input-block");
+      const selectedChar = this.dataset.character;
+      const allBlocks = document.querySelectorAll(".input-block");
+      allBlocks.forEach(block => block.style.display = "none"); // Hide all fields
 
-          customInputs.classList.remove("hidden");
-          allBlocks.forEach(block => block.style.display = "none");
+      const inputs = document.getElementById("custom-inputs");
 
-          if (selectedChar === "Grendals") {
-            ["specialAbility", "visualStyle"].forEach(id =>
-              document.getElementById("block-" + id).style.display = "block"
-            );
-          } else if (selectedChar === "Operation Bravo") {
-            ["weaponType", "combatStyle"].forEach(id =>
-              document.getElementById("block-" + id).style.display = "block"
-            );
-          } else if (selectedChar === "Trash Can Kids") {
-            ["favoriteItem", "favoriteActivity"].forEach(id =>
-              document.getElementById("block-" + id).style.display = "block"
-            );
-          }
-        });
-      });
-
-      document.getElementById("customizer-form").addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const selected = document.querySelector(".template.selected");
-        const uploadedFile = document.getElementById("imageUpload").files[0];
-        const spinner = document.getElementById("spinner");
-        const cardOutput = document.getElementById("card-output");
-
-        if (!selected || !uploadedFile) {
-          alert("Please upload a photo and select a character template.");
-          return;
-        }
-
-        const formData = new FormData();
-        formData.append("photo", uploadedFile);
-        formData.append("character", selected.dataset.character);
-
-        ["specialAbility", "visualStyle", "weaponType", "combatStyle", "favoriteItem", "favoriteActivity"].forEach(id => {
-          const el = document.getElementById(id);
-          if (el && el.value.trim()) {
-            formData.append(id, el.value.trim());
-          }
-        });
-
-        spinner.style.display = "block";
-        cardOutput.innerHTML = "";
-
-        try {
-          const response = await fetch("https://retrocardtest.onrender.com/generate", {
-            method: "POST",
-            body: formData,
-          });
-
-          const data = await response.json();
-          spinner.style.display = "none";
-
-          if (data.imageUrl) {
-            cardOutput.innerHTML = `
-              <div class="card-frame">
-                <img src="${data.imageUrl}" alt="Generated Card" class="card-image" />
-                <div class="card-overlay">
-                  <div class="overlay-name">${data.cardName}</div>
-                  <div class="overlay-level">Grendal Level: ${data.grendalLevel}</div>
-                  <div class="overlay-backstory">${data.backstory}</div>
-                </div>
-              </div>
-              <div style="text-align: center; margin-top: 1rem;">
-                <a href="${data.imageUrl}" download="retrocards-image.png">
-                  <button type="button" class="download-button">Download Image</button>
-                </a>
-              </div>
-            `;
-          } else {
-            alert("Image generation failed.");
-          }
-        } catch (err) {
-          spinner.style.display = "none";
-          console.error(err);
-          alert("An error occurred.");
-        }
-      });
-    </script>
+      if (selectedChar === "Grendals") {
+        ["specialAbility", "visualStyle"].forEach(id =>
+          document.getElementById("block-" + id).style.display = "block"
+        );
+        inputs.classList.remove("hidden");
+      } else if (selectedChar === "Operation Bravo") {
+        ["weaponType", "combatStyle"].forEach(id =>
+          document.getElementById("block-" + id).style.display = "block"
+        );
+        inputs.classList.remove("hidden");
+      } else if (selectedChar === "Trash Can Kids") {
+        ["favoriteItem", "favoriteActivity"].forEach(id =>
+          document.getElementById("block-" + id).style.display = "block"
+        );
+        inputs.classList.remove("hidden");
+      } else {
+        inputs.classList.add("hidden");
+      }
+    });
+  });
+</script>
   </div>
 </body>
 </html>
