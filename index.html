@@ -165,7 +165,15 @@
         spinner.style.display = "none";
 
         if (data.imageUrl) {
-          preview.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />`;
+          const isCard = data.imageUrl.includes("/cards/");
+          const message = isCard
+            ? "✅ Trading card generated!"
+            : "⚠️ Showing fallback image — card template may have failed.";
+
+          preview.innerHTML = `
+            <p style="text-align: center; font-weight: bold;">${message}</p>
+            <img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />
+          `;
 
           download.innerHTML = `
             <a href="${data.imageUrl}" download="retrocards-image.png">
