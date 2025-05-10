@@ -18,6 +18,9 @@ body {
   margin: auto;
   padding: 2rem 1rem;
 }
+.hidden {
+  display: none;
+}
 
 h1 {
   text-align: center;
