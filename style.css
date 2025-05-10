@@ -176,3 +176,28 @@ button:hover {
     transform: rotate(360deg);
   }
 }
+#output {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#card-overlay {
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#card-overlay h2 {
+  font-size: 2rem;
+  color: red;
+  text-shadow: 2px 2px 0 black;
+}
+
+.output.hidden {
+  display: none;
+}
