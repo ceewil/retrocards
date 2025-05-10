@@ -1,176 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Retrocards</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="intro-banner">
-    <h2>Upload a photo. Pick your world. Customize your alter ego.</h2>
-    <p>Retrocards combines you with the raw essence of your favorite retro characters.</p>
-  </header>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-  <div class="container">
-    <h1>Retrocards</h1>
-    <form id="customizer-form">
-      <label for="imageUpload">Upload Your Photo</label>
-      <input type="file" id="imageUpload" accept="image/*" />
-      <div id="preview"></div>
+body {
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  background: #111;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
-      <div id="spinner" style="display: none; text-align: center; margin-top: 1rem;">
-        <p>Generating image...</p>
-        <div class="loader"></div>
-      </div>
+.intro-banner {
+  background: #222;
+  padding: 1rem;
+  border-bottom: 2px solid #333;
+}
 
-      <label>Select Your Character Style</label>
-      <div class="template-options">
-        <div class="template" data-character="Grendals">
-          <img src="templates/grendals-thumb.png.jfif" alt="Grendals" />
-          <p>Grendals</p>
-          <small class="template-desc">Don't get them wet. Don't expose them to phone light. Don't feed them after midnight.</small>
-        </div>
-        <div class="template" data-character="Operation Bravo">
-          <img src="templates/operation-bravo-thumb.png.PNG" alt="Operation Bravo" />
-          <p>Operation Bravo</p>
-          <small class="template-desc">Put the action back in action hero!</small>
-        </div>
-        <div class="template" data-character="Trash Can Kids">
-          <img src="templates/slop-squad-thumb.png.png" alt="Trash Can Kids" />
-          <p>Trash Can Kids</p>
-          <small class="template-desc">Disgustingly Disturbing</small>
-        </div>
-      </div>
+.container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+}
 
-      <div id="custom-inputs" class="custom-inputs hidden">
-        <div class="input-block" id="block-dominantTrait">
-          <label>Dominant Trait (Grendals)</label>
-          <input type="text" id="dominantTrait" placeholder="e.g. muscular" />
-        </div>
-        <div class="input-block" id="block-visualStyle">
-          <label>Visual Style (Grendals)</label>
-          <input type="text" id="visualStyle" placeholder="e.g. soul dancer" />
-        </div>
-        <div class="input-block" id="block-weaponType">
-          <label>Weapon Type (Operation Bravo)</label>
-          <input type="text" id="weaponType" placeholder="e.g. tactical rifle" />
-        </div>
-        <div class="input-block" id="block-combatStyle">
-          <label>Combat Style (Operation Bravo)</label>
-          <input type="text" id="combatStyle" placeholder="e.g. close quarters" />
-        </div>
-        <div class="input-block" id="block-favoriteItem">
-          <label>Favorite Item (Trash Can Kids)</label>
-          <input type="text" id="favoriteItem" placeholder="e.g. moldy lunchbox" />
-        </div>
-        <div class="input-block" id="block-favoriteActivity">
-          <label>Favorite Activity (Trash Can Kids)</label>
-          <input type="text" id="favoriteActivity" placeholder="e.g. burping contests" />
-        </div>
-      </div>
+h1 {
+  margin-bottom: 1rem;
+}
 
-      <button type="submit">Generate Character</button>
-    </form>
+form label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
 
-    <div id="card-output" class="card-output"></div>
-  </div>
+input[type="file"],
+input[type="text"],
+button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+}
 
-  <script>
-    document.getElementById("imageUpload").addEventListener("change", function () {
-      const preview = document.getElementById("preview");
-      preview.innerHTML = "";
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement("img");
-          img.src = e.target.result;
-          preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+button {
+  background-color: #ff0055;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
 
-    document.querySelectorAll(".template").forEach((template) => {
-      template.addEventListener("click", function () {
-        document.querySelectorAll(".template").forEach((el) => el.classList.remove("selected"));
-        this.classList.add("selected");
-        const selectedChar = this.dataset.character;
-        const allBlocks = document.querySelectorAll(".input-block");
-        allBlocks.forEach(block => block.style.display = "none");
+button:hover {
+  background-color: #cc0044;
+}
 
-        if (selectedChar === "Grendals") {
-          ["dominantTrait", "visualStyle"].forEach(id => document.getElementById("block-" + id).style.display = "block");
-        } else if (selectedChar === "Operation Bravo") {
-          ["weaponType", "combatStyle"].forEach(id => document.getElementById("block-" + id).style.display = "block");
-        } else if (selectedChar === "Trash Can Kids") {
-          ["favoriteItem", "favoriteActivity"].forEach(id => document.getElementById("block-" + id).style.display = "block");
-        }
+.template-options {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
 
-        document.getElementById("custom-inputs").classList.remove("hidden");
-      });
-    });
+.template {
+  background: #1a1a1a;
+  border: 2px solid transparent;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 140px;
+  transition: border-color 0.2s ease;
+}
 
-    document.getElementById("customizer-form").addEventListener("submit", async function (e) {
-      e.preventDefault();
+.template.selected {
+  border-color: #ff0055;
+}
 
-      const selected = document.querySelector(".template.selected");
-      const uploadedFile = document.getElementById("imageUpload").files[0];
-      const spinner = document.getElementById("spinner");
-      const cardOutput = document.getElementById("card-output");
+.template img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
 
-      if (!selected || !uploadedFile) {
-        alert("Please upload a photo and select a character template.");
-        return;
-      }
+.template-desc {
+  font-size: 0.75rem;
+  color: #aaa;
+}
 
-      const formData = new FormData();
-      formData.append("photo", uploadedFile);
-      formData.append("character", selected.dataset.character);
+.hidden {
+  display: none;
+}
 
-      ["dominantTrait", "visualStyle", "weaponType", "combatStyle", "favoriteItem", "favoriteActivity"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.value.trim()) {
-          formData.append(id, el.value.trim());
-        }
-      });
+.input-block {
+  margin: 0.5rem 0;
+  text-align: left;
+}
 
-      spinner.style.display = "block";
-      cardOutput.innerHTML = "";
+#preview img {
+  max-width: 100%;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
 
-      try {
-        const response = await fetch("https://retrocardtest.onrender.com/generate", {
-          method: "POST",
-          body: formData,
-        });
+/* Spinner loader */
+.loader {
+  border: 4px solid #444;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
 
-        const data = await response.json();
-        spinner.style.display = "none";
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-        if (data.imageUrl) {
-          cardOutput.innerHTML = `
-            <div class="card-frame">
-              <img src="${data.imageUrl}" alt="Generated Card" class="card-image" />
-              <div class="card-overlay">
-                <div class="overlay-name">${data.cardName}</div>
-                <div class="overlay-level">Grendal Level: ${data.grendalLevel}</div>
-                <div class="overlay-backstory">${data.backstory}</div>
-              </div>
-            </div>
-            <a href="${data.imageUrl}" download="retrocards-image.png">
-              <button type="button" class="download-button">Download Image</button>
-            </a>
-          `;
-        } else {
-          alert("Image generation failed.");
-        }
-      } catch (err) {
-        spinner.style.display = "none";
-        console.error(err);
-        alert("An error occurred.");
-      }
-    });
-  </script>
-</body>
-</html>
+/* Output Card Display */
+.card-output {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.card-frame {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: 525px;
+  background: #000;
+  border: 4px solid #444;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-frame img.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.overlay-name {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  color: red;
+  text-shadow: 2px 2px 0 black;
+}
+
+.overlay-level {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  font-size: 1.1rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.overlay-backstory {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  margin: 0 5%;
+  font-size: 0.95rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  text-align: center;
+}
+
+.download-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #00aa88;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.download-button:hover {
+  background-color: #008066;
+}
