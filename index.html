@@ -48,27 +48,22 @@
           <label for="dominantTrait">Dominant Trait (for Grendals)</label>
           <input type="text" id="dominantTrait" placeholder="e.g. slimy" />
         </div>
-
         <div class="input-block" id="block-visualStyle">
           <label for="visualStyle">Visual Style (for Grendals)</label>
           <input type="text" id="visualStyle" placeholder="e.g. toxic punk" />
         </div>
-
         <div class="input-block" id="block-weaponType">
           <label for="weaponType">Weapon Type (for Operation Bravo)</label>
           <input type="text" id="weaponType" placeholder="e.g. tactical rifle" />
         </div>
-
         <div class="input-block" id="block-combatStyle">
           <label for="combatStyle">Combat Style (for Operation Bravo)</label>
           <input type="text" id="combatStyle" placeholder="e.g. close quarters" />
         </div>
-
         <div class="input-block" id="block-favoriteItem">
           <label for="favoriteItem">Favorite Item (for Trash Can Kids)</label>
           <input type="text" id="favoriteItem" placeholder="e.g. moldy lunchbox" />
         </div>
-
         <div class="input-block" id="block-favoriteActivity">
           <label for="favoriteActivity">Favorite Activity (for Trash Can Kids)</label>
           <input type="text" id="favoriteActivity" placeholder="e.g. burping contests" />
@@ -78,7 +73,7 @@
       <button type="submit">Generate Character</button>
     </form>
 
-    <div id="download-wrapper" style="text-align:center; margin-top: 1rem;"></div>
+    <div id="preview-result" style="text-align: center; margin-top: 2rem;"></div>
   </div>
 
   <script>
@@ -132,8 +127,7 @@
       const selected = document.querySelector(".template.selected");
       const uploadedFile = document.getElementById("imageUpload").files[0];
       const spinner = document.getElementById("spinner");
-      const preview = document.getElementById("preview");
-      const download = document.getElementById("download-wrapper");
+      const previewResult = document.getElementById("preview-result");
 
       if (!selected || !uploadedFile) {
         alert("Please upload a photo and select a character template.");
@@ -152,8 +146,7 @@
       });
 
       spinner.style.display = "block";
-      preview.innerHTML = "";
-      download.innerHTML = "";
+      previewResult.innerHTML = "";
 
       try {
         const response = await fetch("https://retrocardtest.onrender.com/generate", {
@@ -165,17 +158,11 @@
         spinner.style.display = "none";
 
         if (data.imageUrl) {
-          const isCard = data.imageUrl.includes("/cards/");
-          const message = isCard
-            ? "✅ Trading card generated!"
-            : "⚠️ Showing fallback image — card template may have failed.";
-
-          preview.innerHTML = `
-            <p style="text-align: center; font-weight: bold;">${message}</p>
-            <img src="${data.imageUrl}" alt="Generated Image" id="generatedImage" />
-          `;
-
-          download.innerHTML = `
+          previewResult.innerHTML = `
+            <img src="${data.imageUrl}" alt="Generated Image" style="max-width: 100%; border: 2px solid #0f0; margin-bottom: 1rem;" />
+            <h2>${data.cardName || ""}</h2>
+            <p><strong>Grendal Level:</strong> ${data.grendalLevel || "?"}</p>
+            <p><strong>Backstory:</strong> ${data.backstory || "None"}</p>
             <a href="${data.imageUrl}" download="retrocards-image.png">
               <button type="button" class="download-button">Download Image</button>
             </a>
