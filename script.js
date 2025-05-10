@@ -117,7 +117,7 @@ async function composeGrendalCard(baseImgUrl, name, outputFile = "final-card.png
 
 const customFields = {
   "Grendals": (req) => {
-    const trait = req.body.dominantTrait || "slimy";
+    const trait = req.body.specialAbility || "slimy";
     const style = req.body.visualStyle || "punk";
     req.cardName = generateGrendalName(trait, style);
     const skinToneText = req.extractedTone ? `The Grendal should have a ${req.extractedTone}, based on the photo.` : "";
