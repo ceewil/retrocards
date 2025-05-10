@@ -1,213 +1,162 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
 body {
-  font-family: 'Anton', 'Arial Black', sans-serif;
-  background: #111;
+  background-color: #111;
   color: #fff;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
 .intro-banner {
-  background: #222;
-  padding: 1rem;
-  border-bottom: 2px solid #333;
+  background: linear-gradient(to right, #222, #333);
+  padding: 2rem;
+  text-align: center;
+}
+
+.intro-banner h2,
+.intro-banner p {
+  margin: 0.5rem 0;
 }
 
 .container {
-  padding: 2rem;
-  max-width: 700px;
+  max-width: 800px;
   margin: auto;
-}
-
-h1 {
-  margin-bottom: 1rem;
-}
-
-form label {
-  display: block;
-  margin: 1rem 0 0.5rem;
-}
-
-input[type="file"],
-input[type="text"],
-button {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-}
-
-button {
-  background-color: #ff0055;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-button:hover {
-  background-color: #cc0044;
+  padding: 1rem;
 }
 
 .template-options {
   display: flex;
-  gap: 15px;
-  justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .template {
-  background: #1a1a1a;
-  border: 2px solid transparent;
-  padding: 10px;
+  background-color: #222;
+  padding: 1rem;
   border-radius: 10px;
   cursor: pointer;
-  width: 140px;
-  transition: border-color 0.2s ease;
-}
-
-.template.selected {
-  border-color: #ff0055;
+  text-align: center;
+  width: 180px;
+  transition: border 0.3s ease;
 }
 
 .template img {
   width: 100%;
   height: auto;
-  display: block;
-  border-radius: 5px;
+  object-fit: contain;
   margin-bottom: 0.5rem;
 }
 
-.template-desc {
-  font-size: 0.75rem;
-  color: #aaa;
-}
-
-.hidden {
-  display: none;
+.template.selected {
+  border: 2px solid cyan;
 }
 
 .input-block {
-  margin: 0.5rem 0;
-  text-align: left;
+  margin: 1rem 0;
+  display: none;
 }
 
-#preview img {
-  max-width: 100%;
-  margin-top: 1rem;
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  background-color: #09f;
+  color: #fff;
+  border: none;
   border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-/* Spinner loader */
+button:hover {
+  background-color: #06c;
+}
+
 .loader {
-  border: 4px solid #444;
-  border-top: 4px solid #fff;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  margin: 0 auto;
+  width: 36px;
+  height: 36px;
   animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Output Card Display */
-.card-output {
-  margin-top: 2rem;
-  text-align: center;
 }
 
 .card-frame {
   position: relative;
-  display: inline-block;
-  width: 300px;
-  height: 525px;
-  background: #000;
-  border: 4px solid #444;
-  border-radius: 10px;
+  width: 384px;
+  height: 672px;
+  margin: 2rem auto;
+  border: 4px solid #000;
+  background-color: #f8f8f8;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   overflow: hidden;
 }
 
-.card-frame img.card-image {
+.card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
 }
 
 .card-overlay {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
+  padding: 12px;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-family: 'Impact', sans-serif;
+  font-size: 14px;
+  text-align: center;
 }
 
 .overlay-name {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 1.4rem;
-  color: red;
-  text-shadow: 2px 2px 0 black;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff3333;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .overlay-level {
-  position: absolute;
-  bottom: 80px;
-  width: 100%;
-  font-size: 1.1rem;
-  text-align: center;
-  color: white;
-  text-shadow: 1px 1px 2px black;
+  font-size: 16px;
+  margin-top: 4px;
+  color: #ffee00;
 }
 
 .overlay-backstory {
-  position: absolute;
-  bottom: 20px;
-  width: 90%;
-  margin: 0 5%;
-  font-size: 0.95rem;
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  text-align: center;
+  font-size: 12px;
+  margin-top: 6px;
+  color: #e0e0e0;
+  font-style: italic;
 }
 
 .download-button {
   margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #00aa88;
-  color: white;
+  border-radius: 6px;
+  background: #0c6;
+  color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 .download-button:hover {
-  background-color: #008066;
-}
-.loader {
-  border: 4px solid #444;
-  border-top: 4px solid #fff;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  margin: 0 auto;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  background: #0a5;
 }
