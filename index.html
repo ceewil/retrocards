@@ -27,17 +27,17 @@
       <label>Select Your Character Style</label>
       <div class="template-options">
         <div class="template" data-character="Grendals">
-          <img src="templates/grendals-thumb.png.jfif" alt="Grendals" />
+          <img src="templates/grendals-thumb.png" alt="Grendals" />
           <p>Grendals</p>
           <small class="template-desc">Don't get them wet. Don't expose them to phone light. Don't feed them after midnight.</small>
         </div>
         <div class="template" data-character="Operation Bravo">
-          <img src="templates/operation-bravo-thumb.png.PNG" alt="Operation Bravo" />
+          <img src="templates/operation-bravo-thumb.png" alt="Operation Bravo" />
           <p>Operation Bravo</p>
           <small class="template-desc">Put the action back in action hero!</small>
         </div>
         <div class="template" data-character="Trash Can Kids">
-          <img src="templates/slop-squad-thumb.png.png" alt="Trash Can Kids" />
+          <img src="templates/slop-squad-thumb.png" alt="Trash Can Kids" />
           <p>Trash Can Kids</p>
           <small class="template-desc">Disgustingly Disturbing</small>
         </div>
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <button type="submit">Generate Character</button>
+      <button type="submit" class="generate-button">Generate Character</button>
     </form>
 
     <div id="card-output" class="card-output"></div>
@@ -158,9 +158,11 @@
                 <div class="overlay-backstory">${data.backstory}</div>
               </div>
             </div>
-            <a href="${data.imageUrl}" download="retrocards-image.png">
-              <button type="button" class="download-button">Download Image</button>
-            </a>
+            <div style="text-align:center;">
+              <a href="${data.imageUrl}" download="retrocards-image.png">
+                <button type="button" class="download-button">Download Image</button>
+              </a>
+            </div>
           `;
         } else {
           alert("Image generation failed.");
