@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 body {
-  font-family: 'Impact', sans-serif;
+  font-family: 'Anton', 'Arial Black', sans-serif;
   background: #111;
   color: #fff;
   margin: 0;
@@ -66,7 +68,9 @@ button:hover {
 
 .template img {
   width: 100%;
+  height: auto;
   border-radius: 5px;
+  object-fit: contain;
 }
 
 .template-desc {
@@ -123,7 +127,7 @@ button:hover {
   position: absolute;
   top: 20px;
   width: 100%;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   color: red;
   text-shadow: 2px 2px 0 black;
 }
@@ -132,7 +136,7 @@ button:hover {
   position: absolute;
   bottom: 80px;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: white;
   text-shadow: 1px 1px 2px black;
 }
@@ -142,7 +146,7 @@ button:hover {
   bottom: 20px;
   width: 90%;
   margin: 0 5%;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: white;
   text-shadow: 1px 1px 2px black;
 }
