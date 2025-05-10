@@ -37,7 +37,7 @@ function generateGrendalName(trait, style) {
 }
 
 async function getAverageSkinTone(buffer) {
-  const { data, info } = await sharp(buffer).resize(10, 10).raw().toBuffer({ resolveWithObject: true });
+  const { data } = await sharp(buffer).resize(10, 10).raw().toBuffer({ resolveWithObject: true });
   let r = 0, g = 0, b = 0;
   for (let i = 0; i < data.length; i += 3) {
     r += data[i];
@@ -73,6 +73,10 @@ async function composeGrendalCard(baseImgUrl, name, outputFile = "final-card.png
     .resize(imageWidth, imageHeight, { fit: "cover" })
     .toBuffer();
 
+  const templateBuffer = await sharp("Grendalstt.png")
+    .resize(canvasWidth, canvasHeight, { fit: 'fill' })
+    .toBuffer();
+
   const svgText = `
     <svg width="${canvasWidth}" height="${canvasHeight}">
       <style>
@@ -100,7 +104,7 @@ async function composeGrendalCard(baseImgUrl, name, outputFile = "final-card.png
   })
     .composite([
       { input: resizedBuffer, top: imageY, left: imageX },
-      { input: await sharp("Grendalstt.png").resize(canvasWidth, canvasHeight).toBuffer(), top: 0, left: 0 },
+      { input: templateBuffer, top: 0, left: 0 },
       { input: Buffer.from(svgText), top: 0, left: 0 }
     ])
     .png()
