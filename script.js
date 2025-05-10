@@ -100,7 +100,7 @@ async function composeGrendalCard(baseImgUrl, name, outputFile = "final-card.png
   })
     .composite([
       { input: resizedBuffer, top: imageY, left: imageX },
-      { input: "Grendalstt.png", top: 0, left: 0 },
+      { input: await sharp("Grendalstt.png").resize(canvasWidth, canvasHeight).toBuffer(), top: 0, left: 0 },
       { input: Buffer.from(svgText), top: 0, left: 0 }
     ])
     .png()
@@ -142,7 +142,6 @@ app.post('/generate', upload.single('photo'), async (req, res) => {
   const character = req.body.character || '80s hero';
 
   try {
-    // Extract skin tone
     const tone = await getAverageSkinTone(req.file.buffer);
     req.extractedTone = rgbToTone(tone);
   } catch (err) {
