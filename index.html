@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Retrocards</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -27,64 +27,88 @@
       <label>Select Your Character Style</label>
       <div class="template-options">
         <div class="template" data-character="Grendals">
-          <img src="templates/grendals-thumb.png.jfif" alt="Grendals" />
+          <img src="templates/grendals-thumb.png" alt="Grendals" />
           <p>Grendals</p>
-          <small>Don't get them wet. Don't expose them to phone light. Don't feed them after midnight.</small>
+          <small class="template-desc">Don't get them wet. Don't expose them to phone light. Don't feed them after midnight.</small>
         </div>
         <div class="template" data-character="Operation Bravo">
-          <img src="templates/operation-bravo-thumb.png.PNG" alt="Operation Bravo" />
+          <img src="templates/operation-bravo-thumb.png" alt="Operation Bravo" />
           <p>Operation Bravo</p>
-          <small>Put the action back in action hero!</small>
+          <small class="template-desc">Put the action back in action hero!</small>
         </div>
         <div class="template" data-character="Trash Can Kids">
-          <img src="templates/slop-squad-thumb.png.png" alt="Trash Can Kids" />
+          <img src="templates/slop-squad-thumb.png" alt="Trash Can Kids" />
           <p>Trash Can Kids</p>
-          <small>Disgustingly Disturbing</small>
+          <small class="template-desc">Disgustingly Disturbing</small>
         </div>
       </div>
 
       <div id="custom-inputs" class="custom-inputs hidden">
         <div class="input-block" id="block-dominantTrait">
           <label>Dominant Trait (Grendals)</label>
-          <input type="text" id="dominantTrait" placeholder="e.g. slimy" />
+          <input type="text" id="dominantTrait" placeholder="e.g. muscular" />
         </div>
         <div class="input-block" id="block-visualStyle">
           <label>Visual Style (Grendals)</label>
-          <input type="text" id="visualStyle" placeholder="e.g. punk" />
+          <input type="text" id="visualStyle" placeholder="e.g. soul dancer" />
         </div>
-        <!-- Operation Bravo and Trash Can Kids can be added here -->
+        <div class="input-block" id="block-weaponType">
+          <label>Weapon Type (Operation Bravo)</label>
+          <input type="text" id="weaponType" placeholder="e.g. tactical rifle" />
+        </div>
+        <div class="input-block" id="block-combatStyle">
+          <label>Combat Style (Operation Bravo)</label>
+          <input type="text" id="combatStyle" placeholder="e.g. close quarters" />
+        </div>
+        <div class="input-block" id="block-favoriteItem">
+          <label>Favorite Item (Trash Can Kids)</label>
+          <input type="text" id="favoriteItem" placeholder="e.g. moldy lunchbox" />
+        </div>
+        <div class="input-block" id="block-favoriteActivity">
+          <label>Favorite Activity (Trash Can Kids)</label>
+          <input type="text" id="favoriteActivity" placeholder="e.g. burping contests" />
+        </div>
       </div>
 
       <button type="submit">Generate Character</button>
     </form>
 
-    <div id="output" class="output hidden">
-      <div id="card-image"></div>
-      <div id="card-overlay">
-        <h2 id="cardName"></h2>
-        <p><strong>Grendal Level:</strong> <span id="grendalLevel"></span></p>
-        <p id="backstory"></p>
-      </div>
-    </div>
+    <div id="card-output" class="card-output"></div>
   </div>
 
   <script>
+    document.getElementById("imageUpload").addEventListener("change", function () {
+      const preview = document.getElementById("preview");
+      preview.innerHTML = "";
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
     document.querySelectorAll(".template").forEach((template) => {
       template.addEventListener("click", function () {
         document.querySelectorAll(".template").forEach((el) => el.classList.remove("selected"));
         this.classList.add("selected");
-
-        const inputBlock = document.getElementById("custom-inputs");
         const selectedChar = this.dataset.character;
-        inputBlock.classList.remove("hidden");
-
-        document.querySelectorAll(".input-block").forEach(b => b.style.display = "none");
+        const allBlocks = document.querySelectorAll(".input-block");
+        allBlocks.forEach(block => block.style.display = "none");
 
         if (selectedChar === "Grendals") {
-          ["dominantTrait", "visualStyle"].forEach(id => {
-            document.getElementById("block-" + id).style.display = "block";
-          });
+          ["dominantTrait", "visualStyle"].forEach(id => document.getElementById("block-" + id).style.display = "block");
+        } else if (selectedChar === "Operation Bravo") {
+          ["weaponType", "combatStyle"].forEach(id => document.getElementById("block-" + id).style.display = "block");
+        } else if (selectedChar === "Trash Can Kids") {
+          ["favoriteItem", "favoriteActivity"].forEach(id => document.getElementById("block-" + id).style.display = "block");
         }
+
+        document.getElementById("custom-inputs").classList.remove("hidden");
       });
     });
 
@@ -93,45 +117,58 @@
 
       const selected = document.querySelector(".template.selected");
       const uploadedFile = document.getElementById("imageUpload").files[0];
+      const spinner = document.getElementById("spinner");
+      const cardOutput = document.getElementById("card-output");
 
       if (!selected || !uploadedFile) {
-        alert("Please upload a photo and select a template.");
+        alert("Please upload a photo and select a character template.");
         return;
       }
 
       const formData = new FormData();
       formData.append("photo", uploadedFile);
       formData.append("character", selected.dataset.character);
-      ["dominantTrait", "visualStyle"].forEach(id => {
-        const val = document.getElementById(id).value.trim();
-        if (val) formData.append(id, val);
+
+      ["dominantTrait", "visualStyle", "weaponType", "combatStyle", "favoriteItem", "favoriteActivity"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value.trim()) {
+          formData.append(id, el.value.trim());
+        }
       });
 
-      document.getElementById("spinner").style.display = "block";
-      document.getElementById("output").classList.add("hidden");
+      spinner.style.display = "block";
+      cardOutput.innerHTML = "";
 
       try {
         const response = await fetch("https://retrocardtest.onrender.com/generate", {
           method: "POST",
-          body: formData
+          body: formData,
         });
 
         const data = await response.json();
-        document.getElementById("spinner").style.display = "none";
+        spinner.style.display = "none";
 
         if (data.imageUrl) {
-          document.getElementById("card-image").innerHTML = `<img src="${data.imageUrl}" alt="Generated Card" />`;
-          document.getElementById("cardName").textContent = data.cardName;
-          document.getElementById("grendalLevel").textContent = data.grendalLevel || "-";
-          document.getElementById("backstory").textContent = data.backstory || "";
-          document.getElementById("output").classList.remove("hidden");
+          cardOutput.innerHTML = `
+            <div class="card-frame">
+              <img src="${data.imageUrl}" alt="Generated Card" class="card-image" />
+              <div class="card-overlay">
+                <div class="overlay-name">${data.cardName}</div>
+                <div class="overlay-level">Grendal Level: ${data.grendalLevel}</div>
+                <div class="overlay-backstory">${data.backstory}</div>
+              </div>
+            </div>
+            <a href="${data.imageUrl}" download="retrocards-image.png">
+              <button type="button" class="download-button">Download Image</button>
+            </a>
+          `;
         } else {
           alert("Image generation failed.");
         }
       } catch (err) {
-        console.error("❌ Error:", err);
-        alert("Something went wrong generating the image.");
-        document.getElementById("spinner").style.display = "none";
+        spinner.style.display = "none";
+        console.error(err);
+        alert("An error occurred.");
       }
     });
   </script>
