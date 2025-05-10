@@ -1,153 +1,128 @@
 body {
   background-color: #111;
   color: #fff;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
 .intro-banner {
-  background: #222;
-  padding: 20px;
-  border-bottom: 2px solid #444;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #222;
 }
 
 .container {
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  text-align: center;
 }
 
 label {
   display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-  text-align: left;
+  margin: 1rem 0 0.5rem;
 }
 
 input[type="file"],
 input[type="text"] {
-  display: block;
-  margin: 0.5rem 0 1rem;
   width: 100%;
-  padding: 10px;
+  padding: 0.5rem;
   border-radius: 5px;
   border: none;
+  margin-bottom: 1rem;
 }
 
 .template-options {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  margin: 1rem 0;
+  gap: 1rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .template {
-  background: #1d1d1d;
-  padding: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
   flex: 1 1 30%;
-  max-width: 30%;
-  box-shadow: 0 0 5px #000;
+  background: #222;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 2px solid transparent;
 }
 
 .template.selected {
-  outline: 2px solid #00bfff;
-  transform: scale(1.03);
+  border: 2px solid #00bfff;
+  transform: scale(1.05);
 }
 
 .template img {
   width: 100%;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.template-desc {
-  display: block;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
 }
 
 .input-block {
-  margin-top: 10px;
-  text-align: left;
+  margin-bottom: 1rem;
 }
 
-.generate-button,
+button.generate-button,
 .download-button {
   display: block;
-  margin: 20px auto;
-  background-color: #00bfff;
-  color: white;
-  border: none;
-  padding: 12px 24px;
+  margin: 2rem auto 1rem auto;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  border-radius: 6px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  background-color: #007bff;
+  color: white;
 }
 
 .download-button {
   background-color: #00cc66;
 }
 
-.generate-button:hover,
-.download-button:hover {
-  opacity: 0.9;
-}
-
-.card-output {
-  margin-top: 30px;
-}
-
 .card-frame {
-  display: inline-block;
-  position: relative;
-  background: #000;
-  border-radius: 8px;
-  overflow: hidden;
-  max-width: 100%;
-  width: 380px;
+  margin: 2rem auto;
+  max-width: 375px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .card-image {
-  display: block;
   width: 100%;
-  border-bottom: 4px solid #333;
+  height: auto;
+  display: block;
+  border-radius: 4px;
 }
 
 .card-overlay {
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
+  padding: 1rem;
   text-align: center;
+  background: #111;
 }
 
 .overlay-name {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #ff4444;
-  margin-bottom: 0.25rem;
-  text-transform: capitalize;
+  color: #ff3333;
 }
 
 .overlay-level {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #ffdd00;
-  margin-bottom: 0.5rem;
+  color: #ffcc00;
+  margin: 0.5rem 0;
 }
 
 .overlay-backstory {
-  font-size: 0.9rem;
-  color: #ddd;
+  font-size: 1rem;
+  font-style: italic;
+  color: #ccc;
 }
