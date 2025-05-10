@@ -1,22 +1,22 @@
-
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #111;
-  color: white;
   margin: 0;
   padding: 0;
+  background: #111;
+  color: #fff;
 }
 
 .intro-banner {
+  background-color: #222;
+  padding: 1.5rem;
   text-align: center;
-  padding: 2rem 1rem 1rem;
-  background: linear-gradient(90deg, #222, #000);
+  border-bottom: 2px solid #444;
 }
 
 .container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 1rem;
 }
 
 h1 {
@@ -25,142 +25,120 @@ h1 {
 }
 
 label {
-  font-weight: bold;
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
+  margin-top: 1.25rem;
+  font-weight: bold;
 }
 
-input[type="file"],
-input[type="text"] {
+input[type="text"],
+input[type="file"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border: none;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
   border-radius: 5px;
+  border: none;
   font-size: 1rem;
+}
+
+button.generate-button,
+.download-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  background-color: #218838;
 }
 
 .template-options {
   display: flex;
-  gap: 1rem;
+  justify-content: space-around;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .template {
-  background: #222;
-  padding: 1rem;
+  width: 140px;
   text-align: center;
+  border: 2px solid transparent;
+  padding: 0.5rem;
   border-radius: 10px;
+  background-color: #222;
+  transition: border 0.3s ease;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
-  flex: 1 1 250px;
-  max-width: 260px;
-}
-
-.template img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
 }
 
 .template.selected {
-  background: #444;
-  transform: scale(1.05);
+  border: 2px solid #28a745;
+}
+
+.template img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
 
 .template-desc {
-  display: block;
-  font-size: 0.85rem;
-  color: #ccc;
-}
-
-.custom-inputs.hidden {
-  display: none;
+  font-size: 0.8rem;
+  color: #aaa;
 }
 
 .input-block {
-  margin-bottom: 1rem;
-}
-
-.generate-button {
-  display: block;
-  margin: 2rem auto;
-  padding: 0.75rem 2rem;
-  background-color: dodgerblue;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.generate-button:hover {
-  background-color: deepskyblue;
+  margin-top: 1rem;
 }
 
 .card-output {
   margin-top: 2rem;
-  text-align: center;
 }
 
 .card-frame {
   position: relative;
-  display: inline-block;
-  max-width: 100%;
+  max-width: 480px;
+  margin: 2rem auto 1rem;
+  border: 4px solid #28a745;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
 }
 
 .card-image {
   width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
   display: block;
-  margin: 0 auto;
+  border-bottom: 2px solid #28a745;
 }
 
 .card-overlay {
-  margin-top: 1rem;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 10px;
-  color: white;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1rem;
+  text-align: center;
+  background-color: #111;
 }
 
 .overlay-name {
   font-size: 1.5rem;
+  color: #ff4444;
+  text-shadow: 2px 2px 0 #000;
   font-weight: bold;
-  color: red;
   margin-bottom: 0.5rem;
 }
 
 .overlay-level {
   font-size: 1.2rem;
-  color: yellow;
+  color: #00e5ff;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .overlay-backstory {
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.download-button {
-  padding: 0.7rem 1.5rem;
-  background: limegreen;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.download-button:hover {
-  background: #32cd32;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ddd;
 }
