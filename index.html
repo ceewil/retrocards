@@ -50,7 +50,7 @@
         </div>
         <div class="input-block" id="block-visualStyle">
           <label>Visual Style (Grendals)</label>
-          <input type="text" id="visualStyle" placeholder="e.g. soul dancer" />
+          <input type="text" id="visualStyle" placeholder="e.g. inmate" />
         </div>
         <div class="input-block" id="block-weaponType">
           <label>Weapon Type (Operation Bravo)</label>
@@ -82,7 +82,10 @@
           this.classList.add("selected");
 
           const selectedChar = this.dataset.character;
+          const customInputs = document.getElementById("custom-inputs");
           const allBlocks = document.querySelectorAll(".input-block");
+
+          customInputs.classList.remove("hidden");
           allBlocks.forEach(block => block.style.display = "none");
 
           if (selectedChar === "Grendals") {
@@ -98,8 +101,6 @@
               document.getElementById("block-" + id).style.display = "block"
             );
           }
-
-          document.getElementById("custom-inputs").classList.remove("hidden");
         });
       });
 
